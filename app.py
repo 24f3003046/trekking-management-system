@@ -15,6 +15,9 @@ from app_routes.admin import admin_bp
 from app_routes.staff import staff_bp
 from app_routes.user import user_bp
 
+#imports from auth.py for authorization
+from flask_login import current_user
+from flask import redirect, url_for
 
 #creates the flask app
 app = Flask(__name__)
@@ -66,10 +69,16 @@ with app.app_context():
 #setting url pattern 
 @app.route("/")
 
-#temporary, to check if app running
 def home():
-    return "<h1>Welcome to Trekinerary</h1>"
+    if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for("admin.dashboard"))
+        elif current_user.role == "staff":
+            return redirect(url_for("staff.dashboard"))
+        else:
+            return redirect(url_for("user.dashboard"))
 
+    return redirect(url_for("auth.login"))
 
 if __name__ == "__main__":
     app.run(debug=True)

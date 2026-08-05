@@ -20,7 +20,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(15))
     role = db.Column(db.String(10), nullable=False, default="user")
-    approved = db.Column(db.Boolean, default=True)
+    approved = db.Column(db.Boolean)
     blacklisted = db.Column(db.Boolean, default=False)
     joined_on = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -40,6 +40,16 @@ class User(UserMixin, db.Model):
     #not sure what this line here is
     def __repr__(self):
         return f"<User {self.username}>"
+
+    #for user roles, making things easy for myself
+    def is_admin(self):
+        return self.role == "admin"
+
+    def is_staff(self):
+        return self.role == "staff"
+
+    def is_user(self):
+        return self.role == "user"
 
 
 class Trek(db.Model):
