@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>
+
+Assign Staff to
+
+{{ trek.name }}
+
+</h2>
+
+<form method="POST">
+
+{{ form.hidden_tag() }}
+
+<div class="mb-3">
+
+{{ form.staff.label }}
+
+{{ form.staff(class="form-select") }}
+
+</div>
+
+{{ form.submit(class="btn btn-success") }}
+
+</form>
+
+{% endblock %}

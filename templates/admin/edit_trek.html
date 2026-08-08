@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Trek
+{% endblock %}
+
+{% block content %}
+
+<h2>Edit Trek</h2>
+
+<form method="POST">
+
+{{ form.hidden_tag() }}
+
+{% include "admin/trek_form.html" %}
+
+<button
+class="btn btn-warning">
+
+Update Trek
+
+</button>
+
+</form>
+
+{% endblock %}

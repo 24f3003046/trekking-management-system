@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>
+
+Participants
+
+</h2>
+
+<h5>
+
+{{ trek.name }}
+
+</h5>
+
+<table class="table table-dark table-striped">
+
+<thead>
+
+<tr>
+
+<th>User</th>
+
+<th>Booking Date</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for booking in participants %}
+
+<tr>
+
+<td>
+
+{{ booking.user.name }}
+
+</td>
+
+<td>
+
+{{ booking.booked_on.strftime("%d-%m-%Y") }}
+
+</td>
+
+<td>
+
+{{ booking.status }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Admin Dashboard
+</h2>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card bg-success text-white mb-3">
+            <div class="card-body">
+                <h5>Total Treks</h5>
+                <h2>{{ total_treks }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-primary text-white mb-3">
+            <div class="card-body">
+                <h5>Users</h5>
+                <h2>{{ total_users }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark mb-3">
+            <div class="card-body">
+                <h5>Staff</h5>
+                <h2>{{ total_staff }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-danger text-white mb-3">
+            <div class="card-body">
+                <h5>Bookings</h5>
+                <h2>{{ total_bookings }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="list-group mt-4">
+
+    <a href="{{ url_for('admin.manage_treks') }}"
+       class="list-group-item list-group-item-action">
+
+        Manage Treks
+
+    </a>
+
+    <a href="{{ url_for('admin.manage_staff') }}"
+       class="list-group-item list-group-item-action">
+
+        Manage Staff
+
+    </a>
+
+    <a href="{{ url_for('admin.manage_users') }}"
+       class="list-group-item list-group-item-action">
+
+        Manage Users
+
+    </a>
+
+    <a href="{{ url_for('admin.bookings') }}"
+       class="list-group-item list-group-item-action">
+
+        View Bookings
+
+    </a>
+
+</div>
+
+{% endblock %}

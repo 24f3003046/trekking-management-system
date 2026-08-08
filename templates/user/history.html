@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Booking History</h2>
+
+<table class="table table-dark table-striped">
+
+<tr>
+
+<th>Trek</th>
+<th>Date</th>
+<th>Status</th>
+
+</tr>
+
+{% for booking in bookings %}
+
+<tr>
+
+<td>{{ booking.trek.name }}</td>
+
+<td>{{ booking.booked_on.strftime("%d-%m-%Y") }}</td>
+
+<td>{{ booking.status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Manage Staff</h2>
+
+<table class="table table-dark">
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Approved</th>
+<th>Blacklist</th>
+<th>Actions</th>
+
+</tr>
+
+{% for member in staff %}
+
+<tr>
+
+<td>{{ member.id }}</td>
+
+<td>{{ member.name }}</td>
+
+<td>
+
+{{ member.approved }}
+
+</td>
+
+<td>
+
+{{ member.blacklisted }}
+
+</td>
+
+<td>
+
+{% if not member.approved %}
+
+<a
+class="btn btn-success btn-sm"
+href="{{ url_for('admin.approve_staff', id=member.id) }}">
+
+Approve
+
+</a>
+
+{% endif %}
+
+{% if member.blacklisted %}
+
+<a
+class="btn btn-primary btn-sm"
+href="{{ url_for('admin.unblacklist_staff', id=member.id) }}">
+
+Restore
+
+</a>
+
+{% else %}
+
+<a
+class="btn btn-danger btn-sm"
+href="{{ url_for('admin.blacklist_staff', id=member.id) }}">
+
+Blacklist
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

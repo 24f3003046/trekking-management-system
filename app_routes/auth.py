@@ -89,7 +89,7 @@ def login():
 
     if current_user.is_authenticated:
 
-        if current_user.role == "admin":
+        if current_user.is_admin():
             return redirect(url_for("admin.dashboard"))
 
         elif current_user.role == "staff":

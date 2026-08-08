@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Manage Users</h2>
+
+<table class="table table-dark">
+
+<tr>
+
+<th>ID</th>
+<th>Username</th>
+<th>Name</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>{{ user.username }}</td>
+
+<td>{{ user.name }}</td>
+
+<td>
+
+{% if user.blacklisted %}
+
+Blacklisted
+
+{% else %}
+
+Active
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if user.blacklisted %}
+
+<a
+class="btn btn-success btn-sm"
+href="{{ url_for('admin.unblacklist_user', id=user.id) }}">
+
+Restore
+
+</a>
+
+{% else %}
+
+<a
+class="btn btn-danger btn-sm"
+href="{{ url_for('admin.blacklist_user', id=user.id) }}">
+
+Blacklist
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
