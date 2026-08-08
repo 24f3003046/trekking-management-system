@@ -10,7 +10,7 @@ from wtforms import (
     FloatField,
     DateField
 )
-from wtforms.validators import NumberRange
+from wtforms.validators import NumberRange, InputRequired
 
 #login form, creating only one for all 3 types of users
 class LoginForm(FlaskForm):
@@ -181,7 +181,7 @@ class StaffUpdateTrekForm(FlaskForm):
     available_slots = IntegerField(
         "Available Slots",
         validators=[
-            DataRequired(),
+            InputRequired(),
             NumberRange(min=0)
         ]
     )

@@ -151,7 +151,7 @@ def edit_trek(id):
     form = TrekForm(obj=trek)
 
     if form.validate_on_submit():
-
+        #to update all fields of form   
         form.populate_obj(trek)
 
         db.session.commit()
