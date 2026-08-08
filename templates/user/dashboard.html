@@ -3,15 +3,15 @@
 <h2>Welcome, {{ current_user.name }}</h2>
 
 <div class="alert alert-success">
-You have booked<strong>{{ bookings }}</strong>trek(s).
+You have booked<strong>{{ bookings }}</strong> trek(s).
 </div>
 
 <h3 class="mt-4 mb-3">
     Available Treks
 </h3>
-#form for searching treks
+<!--form for searching treks-->
 <form method="GET" class="row mb-4">
-    #search bar for location
+    <!--search bar for location-->
     <div class="col-md-5">
         <input
             type="text"
@@ -19,7 +19,7 @@ You have booked<strong>{{ bookings }}</strong>trek(s).
             class="form-control"
             placeholder="Search by location">
     </div>
-    #dropdown for difficulty
+    <!--dropdown for difficulty-->
     <div class="col-md-4">
         <select
             name="difficulty"
@@ -30,7 +30,7 @@ You have booked<strong>{{ bookings }}</strong>trek(s).
             <option value="Hard">Hard</option>
         </select>
     </div>
-    #search button
+    <!--search button-->
     <div class="col-md-3">
         <button
             type="submit"
