@@ -27,10 +27,8 @@ def user_required():
     if not current_user.is_user():
         return False
 
-    if current_user.blacklisted:
-        return False
-
-    return True
+    return not current_user.blacklisted
+        
 
 
 @user_bp.route("/dashboard")
@@ -39,10 +37,25 @@ def dashboard():
 
     if not user_required():
         return redirect(url_for("auth.login"))
-
-    treks = Trek.query.filter_by(
+    #search bars in dashboard
+    difficulty = request.args.get("difficulty")
+    location = request.args.get("location")
+    #for queries
+    query = Trek.query.filter_by(
         status="Open"
-    ).all()
+    )
+    #filter based on difficulty
+    if difficulty:
+        query = query.filter_by(
+            difficulty=difficulty
+        )
+    #filter based on location
+    if location:
+        query = query.filter(
+            Trek.location.contains(location)
+        )
+
+    treks = query.all()
 
     bookings = Booking.query.filter_by(
         user_id=current_user.id
