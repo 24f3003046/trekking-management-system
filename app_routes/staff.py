@@ -29,10 +29,10 @@ def staff_required():
     if not current_user.approved:
         return False
 
-    if current_user.blacklisted:
-        return False
+    
+    return not current_user.blacklisted
 
-    return True
+    
 
 
 @staff_bp.route("/dashboard")
