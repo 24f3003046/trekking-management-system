@@ -13,7 +13,7 @@ from flask_login import (
 
 from extensions import db
 from models import Trek
-from forms import StaffUpdateTrekForm
+from forms import StaffUpdateTrekForm, EditProfileForm
 
 staff_bp = Blueprint("staff", __name__)
 
@@ -110,3 +110,18 @@ def participants(id):
         trek=trek,
         participants=participants
     )
+
+@staff_bp.route("/profile", methods=["GET", "POST"])
+@login_required
+def profile():
+    if not staff_required():
+        return redirect(url_for("auth.login"))
+    form = EditProfileForm(obj=current_user)
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.email = form.email.data
+        current_user.phone = form.phone.data
+        db.session.commit()
+        flash("Profile Updated", "success")
+        return redirect(url_for("staff.dashboard"))
+    return render_template("staff/profile.html", form=form)
