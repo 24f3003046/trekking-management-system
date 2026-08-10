@@ -51,7 +51,7 @@ You have booked<strong>{{ bookings }}</strong> trek(s).
 </tr>
 {% for trek in treks %}
 <tr>
-<td>{{ trek.name }}</td>
+<td><a href="{{ url_for('user.trek_detail', id=trek.id) }}" class="text-light">{{ trek.name }}</a></td>
 <td>{{ trek.location }}</td>
 <td>{{ trek.difficulty }}</td>
 <td>₹{{ trek.price }}</td>

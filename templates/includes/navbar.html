@@ -1,148 +1,101 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-
     <div class="container">
-
         <a class="navbar-brand fw-bold"
            href="{{ url_for('home') }}">
-
             <i class="bi bi-tree-fill"></i>
-
             Trekinerary
-
         </a>
-
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbar">
-
             <span class="navbar-toggler-icon"></span>
-
         </button>
-
         <div class="collapse navbar-collapse"
              id="navbar">
-
             <ul class="navbar-nav ms-auto">
-
                 {% if current_user.is_authenticated %}
-
                     {% if current_user.is_admin() %}
-
                         <li class="nav-item">
                             <a class="nav-link"
                             href="{{ url_for('admin.dashboard') }}">
                                 Dashboard
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link"
                             href="{{ url_for('admin.manage_treks') }}">
                                 Treks
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link"
                             href="{{ url_for('admin.manage_staff') }}">
                                 Staff
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link"
                             href="{{ url_for('admin.manage_users') }}">
                                 Users
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link"
                             href="{{ url_for('admin.bookings') }}">
                                 Bookings
                             </a>
                         </li>
-
                     {% elif current_user.is_staff() %}
-
                         <li class="nav-item">
-
                             <a class="nav-link"
                                href="{{ url_for('staff.dashboard') }}">
-
                                 Dashboard
-
                             </a>
-
                         </li>
-
-                    {% else %}
-
                         <li class="nav-item">
-
+                            <a class="nav-link" href="{{ url_for('staff.profile') }}">Profile</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
                             <a class="nav-link"
                                href="{{ url_for('user.dashboard') }}">
-
                                 Dashboard
-
                             </a>
-
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('user.history') }}">Booking History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('user.profile') }}">Profile</a>
+                        </li>
                     {% endif %}
-
                     <li class="nav-item">
-
                         <a class="nav-link"
                            href="{{ url_for('auth.logout') }}">
-
                             Logout
-
                         </a>
-
                     </li>
-
                     <li class="nav-item">
-
                         <span class="navbar-text">
-
                             {{ current_user.username }}
-
                         </span>
-
                     </li>
-
                 {% else %}
-
                     <li class="nav-item">
-
                         <a class="nav-link"
                            href="{{ url_for('auth.login') }}">
-
                             Login
-
                         </a>
-
                     </li>
-
                     <li class="nav-item">
-
                         <a class="nav-link"
                            href="{{ url_for('auth.register') }}">
-
                             Register
-
                         </a>
-
                     </li>
-
                 {% endif %}
-
             </ul>
-
         </div>
-
     </div>
-
 </nav>

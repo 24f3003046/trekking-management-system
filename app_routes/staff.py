@@ -32,9 +32,7 @@ def staff_required():
 def dashboard():
     if not staff_required():
         return redirect(url_for("auth.login"))
-    treks = Trek.query.filter_by(
-        staff_id=current_user.id
-    ).all()
+    treks = current_user.assigned_treks
     return render_template(
         "staff/dashboard.html",
         treks=treks
@@ -66,16 +64,17 @@ def update_trek(id):
                 form=form,
                 trek=trek
             )
-
         trek.available_slots=new_slots
         trek.status=form.status.data
+        if form.status.data == "Closed":
+            for b in trek.bookings:
+               if b.status == "Booked":
+                   b.status = "Closed"
         db.session.commit()
         flash("Trek updated successfully.", "success")
-
         return redirect(
             url_for("staff.dashboard")
         )
-
     return render_template(
         "staff/update_trek.html",
         form=form,
@@ -86,25 +85,18 @@ def update_trek(id):
 @staff_bp.route("/participants/<int:id>")
 @login_required
 def participants(id):
-
     if not staff_required():
         return redirect(url_for("auth.login"))
-
     trek = Trek.query.get_or_404(id)
-
     if trek.staff_id != current_user.id:
-
         flash(
             "Access Denied",
             "danger"
         )
-
         return redirect(
             url_for("staff.dashboard")
         )
-
     participants = trek.bookings
-
     return render_template(
         "staff/participants.html",
         trek=trek,

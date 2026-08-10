@@ -67,35 +67,6 @@ def dashboard():
         bookings=bookings
     )
 
-
-@user_bp.route("/treks")
-@login_required
-def treks():
-
-    if not user_required():
-        return redirect(url_for("auth.login"))
-
-    difficulty = request.args.get("difficulty")
-    location = request.args.get("location")
-
-    query = Trek.query.filter_by(status="Open")
-
-    if difficulty:
-        query = query.filter_by(difficulty=difficulty)
-
-    if location:
-        query = query.filter(
-            Trek.location.contains(location)
-        )
-
-    treks = query.all()
-
-    return render_template(
-        "user/treks.html",
-        treks=treks
-    )
-
-
 @user_bp.route("/book/<int:id>")
 @login_required
 def book_trek(id):
@@ -213,3 +184,11 @@ def profile():
         "user/profile.html",
         form=form
     )
+#to render trek_detail.html, and show rek deails when user needs
+@user_bp.route("/trek/<int:id>")
+@login_required
+def trek_detail(id):
+    if not user_required():
+        return redirect(url_for("auth.login"))
+    trek = Trek.query.get_or_404(id)
+    return render_template("user/trek_detail.html", trek=trek)

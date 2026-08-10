@@ -138,10 +138,8 @@ class TrekForm(FlaskForm):
         "Status",
         choices=[
             ("Pending", "Pending"),
-            ("Approved", "Approved"),
             ("Open", "Open"),
             ("Closed", "Closed"),
-            ("Completed", "Completed")
         ]
     )
 
